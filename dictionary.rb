@@ -26,7 +26,7 @@ def add_entry
   puts "Would you like to add another entry? y/n"
   gets.chomp == "y"? add_entry : main_menu
 end
-
+#
 puts "Moof and Justin's Dictionary!"
 #menu: view all entries, add a new entry, edit an entry, remove an entry, lookup a word
 def main_menu
