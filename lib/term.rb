@@ -6,41 +6,52 @@ class Term
     @@dictionary = []
   end
 
-  def initialize(word, definition)
-    @definition = definition
-    @word = word
-    @@dictionary << self
-  end
-
-  def word
-    @word
-  end
-
-  def definition
-    @definition
-  end
-
   def Term.dictionary
     @@dictionary
   end
 
   def Term.search(word)
-    @@dictionary.each do |dict_word|
-      if word.upcase == dict_word.word.upcase
-        return dict_word
+    @@dictionary.each do |term|
+      words_array = term.words.collect {|word| word.word}
+      if words_array.include?(word)
+        return term
       end
     end
+
     return nil
   end
 
-  def edit_definition(new_definition)
-    @definition = new_definition
+  def initialize(word, definition)
+    @words = [word]
+    @definitions = [definition]
+
+    @@dictionary << self
+  end
+
+  def words
+    @words
+  end
+
+  def definitions
+    @definitions
+  end
+
+  def add_word(new_word)
+    @words << new_word
+  end
+
+  def add_definition(new_definition)
+    @definitions << new_definition
+  end
+
+  def remove_definition(definition)
+    @definitions.delete(definition)
   end
 
   def delete
     @@dictionary.delete(self)
-    @word = ""
-    @definition = ""
+    @words = []
+    @definitions = []
   end
 
 end
